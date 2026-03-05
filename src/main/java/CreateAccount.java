@@ -5,13 +5,23 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /*
-* OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
-* MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+* OBJ10-J "Don't use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
+* MET01-J "Don't use assertions in the final code" is followed in this file, no assertations are present
 */
+/**
+ * Handles the creation of a new user login account by collecting
+ * and validating user input before writing to file.
+ */
 public class CreateAccount {
     private static final Logger logger = Logger.getLogger(CreateAccount.class.getName());
     fileWriting fileOperations = new fileWriting();
 
+    /**
+     * Collects user input to create a new account and writes it to file.
+     *
+     * @return the created UserInfo object, or null if creation failed or account already exists
+     * @throws IOException if an error occurs during file writing
+     */
     public UserInfo create() throws IOException{
         Scanner userInput = new Scanner(System.in);
         DateTimeFormatter dateFormatting = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -48,6 +58,15 @@ public class CreateAccount {
         return fileOperations.accountCreationSuccess(userId, username, firstName, lastName, email, dob, password, ssn, pin);
     }
 
+    /**
+     * Constructs a unique user ID from name and date of birth, and checks for duplicates.
+     *
+     * @param username  the chosen username
+     * @param firstName the user's first name
+     * @param lastName  the user's last name
+     * @param dob       the user's date of birth
+     * @return a unique user ID string, or null if the account already exists
+     */
     //Recommendation 5 - OBJ54-J - Devin Diaz
     //Local variables are allowed to go out of scope naturally
     private String uniqueUserIdCreation(String username, String firstName, String lastName, LocalDate dob){
@@ -73,6 +92,13 @@ public class CreateAccount {
             return null;
     }
 
+    /**
+     * Prompts the user until a non-empty string is provided.
+     *
+     * @param scanner       the input scanner
+     * @param systemMessage the prompt to display
+     * @return a non-empty trimmed string
+     */
     private String nonEmptyStringCheck(Scanner scanner, String systemMessage){
         String input; 
 
@@ -88,6 +114,13 @@ public class CreateAccount {
         return input;
     }
 
+    /**
+     * Prompts the user until a valid date in MM/dd/yyyy format is provided.
+     *
+     * @param scanner   the input scanner
+     * @param formatter the date formatter to validate input against
+     * @return a valid LocalDate
+     */
     private LocalDate nonEmptyDateCheck(Scanner scanner, DateTimeFormatter formatter) {
         LocalDate date = null;
 
@@ -105,6 +138,14 @@ public class CreateAccount {
         return date;
     }
 
+    /**
+     * Prompts the user until a numeric string of the exact required length is provided.
+     *
+     * @param scanner the input scanner
+     * @param message the prompt to display
+     * @param length  the exact number of digits required
+     * @return a numeric string of the specified length
+     */
     private String nonEmptyPinSSNCheck(Scanner scanner, String message, int length) {
         String input;
 
@@ -122,6 +163,13 @@ public class CreateAccount {
         return input;
     }
 
+    /**
+     * Prompts the user until a valid email address containing '@' and '.' is provided.
+     *
+     * @param scanner       the input scanner
+     * @param systemMessage the prompt to display
+     * @return a valid email address string
+     */
     private String nonEmptyEmailCheck(Scanner scanner, String systemMessage){
         String input;
 
