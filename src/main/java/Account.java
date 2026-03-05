@@ -15,10 +15,18 @@ public class Account {
     //Private lock object prevents synchronization on reusable objects
     private final Object lock = new Object();
 
+    /** 
+    * Default constructor
+    */
     public Account() {
         this.transactionHistory = new Transaction[MAX_TRANSACTIONS];
     }
-
+    /** 
+    * Creates an account with an account name and balance
+    * 
+    * @param accountName name of the account
+    * @param balance balance of the account
+    */
     public Account(String accountName, double balance){
         
         //Rule 6 - MET00-J - Devin Diaz
@@ -34,17 +42,29 @@ public class Account {
         this.balance = balance;
         this.transactionHistory = new Transaction[MAX_TRANSACTIONS];
     }
-
+    /** 
+    * Returns the account name
+    * 
+    * @return the account name
+    */
     public String getAccountName() {
         return accountName;
     }
-
+    /** 
+    * Returns the balance of an account
+    * 
+    * @return balance of the account
+    */
     public double getBalance() {
         synchronized(lock) {
             return balance;
         }
     }
-
+    /** 
+    * Sets the balance of an account
+    * 
+    * @param balance the new balance for the account
+    */
     public void setBalance(double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative.");
@@ -54,15 +74,29 @@ public class Account {
             this.balance = balance;
         }
     }
-
+    /** 
+    * Returns transaction history as an array
+    * 
+    * @return array of past transactions
+    */
     public Transaction[] getTransactionHistory() {
         return transactionHistory;
     }
-
+    /** 
+    * Sets transation history to a new array
+    * 
+    * @param transactionHistory the new transaction history as an array
+    */
     public void setTransactionHistory(Transaction[] transactionHistory) {
         this.transactionHistory = transactionHistory;
     }
-
+    /** 
+    * Creates and adds a new transaction to the transaction history and returns if successful
+    * 
+    * @param amount the amount of money in the transaction
+    * @param type the type of transaction
+    * @return if the transaction was successful
+    */
     public boolean recordTransaction(double amount, Transaction.TransactionType type) {
         synchronized(lock) {
             Transaction incoming = new Transaction(amount, type, LocalDateTime.now(), balance);
@@ -76,7 +110,12 @@ public class Account {
             return true;
         }
     }
-    
+    /** 
+    * Determines whether a transaction is already in the transaction history
+    * 
+    * @param incoming the incoming transaction
+    * @return if the transaction is already in the transaction history
+    */
     private boolean isDuplicate(Transaction incoming) {
         Object[] incomingSignature = incoming.toSignature();
         for (Transaction existing : transactionHistory) {
@@ -89,7 +128,11 @@ public class Account {
         }
         return false;
     }
-
+    /** 
+    * Adds the transaction to the transaction history
+    * 
+    * @param transaction the transaction to be added
+    */
     private void addTransaction(Transaction transaction) {
         for (int i = 0; i < transactionHistory.length; i++) {
             if (transactionHistory[i] == null) {
@@ -99,7 +142,10 @@ public class Account {
         }
         System.out.println("Transaction history is full.");
     }
-
+    /** 
+    * Prints total transaction history
+    * 
+    */
     public void printHistory() {
         System.out.println("\n--- Transaction History: " + accountName + " ---");
         boolean hasTransactions = false;
@@ -115,10 +161,10 @@ public class Account {
             System.out.println("No transactions on record.");
         }
     }
-    
+
     // MET06: Do not invoke overridable methods in clone()
     @Override
-    /*
+    /** 
     Creates shallow clone of an account
 
     @return A shallow copy of account
