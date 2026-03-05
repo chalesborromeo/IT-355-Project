@@ -13,7 +13,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class fileWriting {
     private static final String USER_DIRECTORY = "users";
     private static final Logger logger = Logger.getLogger(fileWriting.class.getName());
-
+    /** 
+    * Creates an account
+    * 
+    * @param userID the user's id
+    * @param username the username of the user
+    * @param firstName the first name of the user
+    * @param lastName the last name of the user
+    * @throws IOException if unsuccessful
+    * @return new user info
+    */
     public UserInfo accountCreationSuccess(String userId, String username, String firstName, String lastName, String email, LocalDate dob, String password, String ssn, String pin) throws IOException{
         try{
             UserInfo userInfo = new UserInfo(
@@ -43,7 +52,12 @@ public class fileWriting {
         }
 
     }
-
+    /** 
+    * returns whether an account file exists with given user id
+    * 
+    * @param userId the user id
+    * @return if the account file exists
+    */
     public boolean duplicateAccountFile(String userId){
         try{
             File userFile = new File(USER_DIRECTORY + "/" + userId + ".json");
@@ -54,7 +68,13 @@ public class fileWriting {
         }
 
     }
-
+    /** 
+    * Gets a user based on a username and password
+    * 
+    * @param username the username of the user
+    * @param password the password of the user
+    * @return the user
+    */
     public UserInfo loadUser(String username, String password){
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -85,7 +105,11 @@ public class fileWriting {
 
         return null;
     }
-
+    /** 
+    * Saves a user to json
+    * 
+    * @param user the user to be saved
+    */
     public void saveUser(UserInfo user) {
         try {
             ObjectMapper mapper = new ObjectMapper();
