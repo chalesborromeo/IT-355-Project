@@ -1,9 +1,11 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.logging.*;
 /*
 * OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
 * MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
@@ -12,7 +14,7 @@ public class fileWriting {
     private static final String USER_DIRECTORY = "users";
     private static final Logger logger = Logger.getLogger(fileWriting.class.getName());
 
-    public UserInfo accountCreationSuccess(String userId, String username, String firstName, String lastName, String email, LocalDate dob, String password, String ssn, String pin){
+    public UserInfo accountCreationSuccess(String userId, String username, String firstName, String lastName, String email, LocalDate dob, String password, String ssn, String pin) throws IOException{
         try{
             UserInfo userInfo = new UserInfo(
                 userId, username, firstName, lastName, email, dob, password, ssn, pin, new ArrayList<>());
@@ -34,7 +36,8 @@ public class fileWriting {
                 System.err.println("ERR02-J: Logging failure — original error: Failed to write user file for userId=" + userId);
                 System.err.println("ERR02-J: Original exception: " + e.getMessage());
             }
-            throw new RuntimeException("Failed to write user file for userId=" + userId, e);
+            // Rule ERR07
+            throw new IOException("Failed to write user file for userId=" + userId, e);
             // Rule 1 End - FIO02 - Joey Pina
             // Rule 5 End - ERR02 - Joey Pina
         }

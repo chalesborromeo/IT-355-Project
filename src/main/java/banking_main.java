@@ -1,14 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;
 /*
 * OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
 * MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+* MET12-J: Do not use finalizers
 */
 public class banking_main {
 
     private static int menuSelection = 0;
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         LoginService auth = new LoginService();
         CreateAccount createAccount = new CreateAccount();

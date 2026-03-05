@@ -1,7 +1,9 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
 * OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
 * MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
@@ -10,7 +12,7 @@ public class CreateAccount {
     private static final Logger logger = Logger.getLogger(CreateAccount.class.getName());
     fileWriting fileOperations = new fileWriting();
 
-    public UserInfo create(){
+    public UserInfo create() throws IOException{
         Scanner userInput = new Scanner(System.in);
         DateTimeFormatter dateFormatting = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
