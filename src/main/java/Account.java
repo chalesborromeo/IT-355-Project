@@ -115,4 +115,16 @@ public class Account {
             System.out.println("No transactions on record.");
         }
     }
+    
+    // MET06: Do not invoke overridable methods in clone()
+    @Override
+    /*
+    Creates shallow clone of an account
+
+    @return A shallow copy of account
+    @throws CloneNotSupportedException If the object could not be cloned
+    */
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); 
+    }
 }
