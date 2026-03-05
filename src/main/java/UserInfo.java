@@ -1,8 +1,12 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInfo {
-
+    /*
+	 * OBJ10-J (Don’t use public static nonfinal variables) is followed in this file, no public static nonfinal variables are present
+	 * MET01-J (Don’t use assertions in the final code) is followed in this file, no assertations are present
+	 */
     // Rule 4 Start - MET11 - Joey Pina
         // username, userId, and dob have been made final since these cannot be reassigned after it's constructed. 
         // Since that these are the key fields for the object userId - if they were reassignable then comparison would break
@@ -82,6 +86,8 @@ public class UserInfo {
     }
 
     public List<Account> getAccounts(){
+        //Rule 5, OBJ05-J Returns a clone of the object instead of a reference
+        return new ArrayList<Account>(accounts);
         //Recommendation 6 - MET55-J - Devin Diaz
         //Return an empty collection instead of null
         if (accounts == null) {
