@@ -88,12 +88,15 @@ public class UserInfo {
     public List<Account> getAccounts(){
         //Rule 5, OBJ05-J Returns a clone of the object instead of a reference
         //return new ArrayList<Account>(accounts);
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
         //Recommendation 6 - MET55-J - Devin Diaz
         //Return an empty collection instead of null
-        if (accounts == null) {
-            return new java.util.ArrayList<>();
-        }
+        // if (accounts == null) {
+        //     return new java.util.ArrayList<>();
+        // }
         return accounts;
     }
 
