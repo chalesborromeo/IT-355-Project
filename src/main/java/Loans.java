@@ -12,6 +12,12 @@ public class Loans implements Serializable {
 
     //Rule 14 - SER01-J - Devin Diaz
     //Correct readObject signature for custom deserialization logic.
+    /** 
+    * Reads a loan in from the ObjectInputStream
+    * 
+    * @param in 
+    * @throws InvalidObjectException if the read loan id is null
+    */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
 
@@ -22,6 +28,12 @@ public class Loans implements Serializable {
 
     //Rule 14 - SER04-J - Devin Diaz
     //Check security permissions before serialization.
+    /** 
+    * Writes an object to a specified output stream
+    * 
+    * @param out the output stream to write to 
+    * @throws IOException if problem with serialization
+    */
     private void writeObject(ObjectOutputStream out) throws IOException {
 
         SecurityManager sm = System.getSecurityManager();
@@ -38,7 +50,11 @@ public class Loans implements Serializable {
     public static class LoanRecord implements Serializable {
 
         private String recordId;
-
+        /** 
+        * Constructor for making a loan record
+        * 
+        * @param id the record id
+        */
         public LoanRecord(String id) {
             this.recordId = id;
         }
