@@ -5,16 +5,30 @@ import java.util.Scanner;
 * OBJ10-J "Don't use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
 * MET01-J "Don't use assertions in the final code" is followed in this file, no assertations are present
 */
+
+/**
+ * Handles balance-related actions for a user's bank account,
+ * including checking balance, depositing, and withdrawing funds.
+ */
 public class BalanceActions {
     //rule MET04, methods have appropriate access levels
     private final Scanner scanner;
     private final fileWriting fileOperations = new fileWriting();
 
+    /**
+     * Constructs a BalanceActions instance and initializes the scanner.
+     */
     public BalanceActions() {
                 //MET05, constructor only initializes fields rather than calling overridable methods
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays the balance actions menu and routes the user to the
+     * appropriate action based on their selection.
+     *
+     * @param user the currently logged-in user
+     */
     public void showBalanceMenu(UserInfo user) {
         //checks whether user is null. Rule EXP01
         if (user == null) {
@@ -73,6 +87,12 @@ public class BalanceActions {
         }
     }
 
+    /**
+     * Prompts the user to select one of their accounts by number.
+     *
+     * @param accounts the list of accounts belonging to the user
+     * @return the selected Account, or null if the selection was invalid
+     */
     private Account selectAccount(List<Account> accounts) {
 
         System.out.println("\nSelect Account:");
@@ -100,10 +120,22 @@ public class BalanceActions {
         }
     }
 
+    /**
+     * Prints the current balance of the given account.
+     *
+     * @param account the account to check
+     */
     private void checkBalance(Account account) {
         System.out.println("Current Balance: $" + account.getBalance());
     }
 
+    /**
+     * Prompts the user for a deposit amount, checks for duplicate transactions,
+     * updates the balance if accepted, and persists the changes to file.
+     *
+     * @param account the account to deposit into
+     * @param user    the user who owns the account, used for saving state
+     */
     private void deposit(Account account, UserInfo user) {
 
         System.out.print("Enter deposit amount: ");
@@ -138,6 +170,13 @@ public class BalanceActions {
         }
     }
 
+    /**
+     * Prompts the user for a withdrawal amount, checks for duplicate transactions
+     * and sufficient funds, updates the balance if accepted, and persists the changes to file.
+     *
+     * @param account the account to withdraw from
+     * @param user    the user who owns the account, used for saving state
+     */
     private void withdraw(Account account, UserInfo user) {
 
         System.out.print("Enter withdrawal amount: ");
