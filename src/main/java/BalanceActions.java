@@ -2,8 +2,8 @@
 import java.util.List;
 import java.util.Scanner;
 /*
-* OBJ10-J "Don’t use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
-* MET01-J "Don’t use assertions in the final code" is followed in this file, no assertations are present
+* OBJ10-J "Don't use public static nonfinal variables" is followed in this file, no public static nonfinal variables are present
+* MET01-J "Don't use assertions in the final code" is followed in this file, no assertations are present
 */
 public class BalanceActions {
     //rule MET04, methods have appropriate access levels
@@ -116,7 +116,6 @@ public class BalanceActions {
                 System.out.println("Amount must be positive.");
                 return;
             }
-            
             //VNA00,synchronization is used to make sure the updated value visible
             boolean depositAccepted;
             synchronized (account) {
@@ -152,7 +151,6 @@ public class BalanceActions {
                 return;
             }
             //VNA00,synchronization is used to make sure the updated value visible
-
             boolean withdrawAccepted;
             synchronized (account) {
 
